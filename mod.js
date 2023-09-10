@@ -93,14 +93,7 @@ class BSONRuntimeError extends BSONError {
 function nodejsMathRandomBytes(byteLength) {
     return nodeJsByteUtils.fromNumberArray(Array.from({ length: byteLength }, () => Math.floor(Math.random() * 256)));
 }
-const nodejsRandomBytes = await (async () => {
-    try {
-        return (await import('crypto')).randomBytes;
-    }
-    catch {
-        return nodejsMathRandomBytes;
-    }
-})();
+const nodejsRandomBytes = nodejsMathRandomBytes;
 const nodeJsByteUtils = {
     toLocalBufferType(potentialBuffer) {
         if (Buffer.isBuffer(potentialBuffer)) {
